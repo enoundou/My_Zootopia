@@ -10,13 +10,15 @@ def output_animals(animals):
     output =''
     for animal in animals:
         output += '<li class="cards__item">'
-        output += f"Name: {animal['name']}<br/>\n"
-        output += f"Diet: {animal['characteristics']['diet']}<br/>\n"
+        output += f"<div class='card__title'>{animal["name"]}</div>\n"
+        output += '<p class="card__text">'
+        output += f"<strong>Diet:</strong> {animal['characteristics']['diet']}<br/>\n"
         if "locations" in animal and len(animal["locations"]) > 0:
-             output += f"Location: {animal['locations'][0]}<br/>\n"
+            output += f"<strong>Location:</strong> {animal['locations'][0]}<br/>\n"
         if 'characteristics' in animal and 'type' in animal['characteristics']:
-            output += f"Type: {animal['characteristics']['type']}<br/>\n"
-        output += '</li>\n'
+            output += f"<strong>Type:</strong> {animal['characteristics']['type']}<br/>\n"
+        output += '</p>'
+        output += '</li>'
     return output
 
 
