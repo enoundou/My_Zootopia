@@ -22,6 +22,17 @@ def output_animals(animals):
 def main():
     animals_data = load_data('animals_data.json')
     print(output_animals(animals_data))
+    
+     # open and read file
+    with open("animals_template.html", "r") as file:
+        content = file.read()
+
+    # replace __REPLACE_ANIMALS_INFO__
+    content = content.replace("__REPLACE_ANIMALS_INFO__", output_animals(animals_data))
+
+    # write back to file
+    with open("animals_template.html", "w") as file:
+        file.write(content)
 
 
 if __name__ == '__main__':
