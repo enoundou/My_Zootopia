@@ -9,20 +9,21 @@ def load_data(file_path):
 def output_animals(animals):
     output =''
     for animal in animals:
-        output += f"Name: {animal['name']}\n"
-        output += f"Diet: {animal['characteristics']['diet']}\n"
+        output += '<li class="cards__item">'
+        output += f"Name: {animal['name']}<br/>\n"
+        output += f"Diet: {animal['characteristics']['diet']}<br/>\n"
         if "locations" in animal and len(animal["locations"]) > 0:
-            output += f"Location: {animal['locations'][0]}\n"
+             output += f"Location: {animal['locations'][0]}<br/>\n"
         if 'characteristics' in animal and 'type' in animal['characteristics']:
-            output += f"Type: {animal['characteristics']['type']}\n"
-        output += '\n'
+            output += f"Type: {animal['characteristics']['type']}<br/>\n"
+        output += '</li>\n'
     return output
 
 
 def main():
     animals_data = load_data('animals_data.json')
     print(output_animals(animals_data))
-    
+
      # open and read file
     with open("animals_template.html", "r") as file:
         content = file.read()
