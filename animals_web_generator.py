@@ -7,20 +7,25 @@ def load_data(file_path):
 
 
 def serialize_animal(animal_obj) :
-    # append information to each string
+    """
+    Get the HTML information for an “animal” object
+    :param animal_obj:
+    :return: HTML string of an “animal” object
+    """
     output_obj =''
     output_obj += '<li class="cards__item">\n'
-    output_obj += f'<div class="card__title">{animal_obj["name"]}</div>\n'
+    output_obj += f"<div class='card__title'>{animal_obj['name']}</div>\n"
     output_obj += '<div class="card__text">'
     output_obj += '<ul>'
     if 'characteristics' in animal_obj and 'diet' in animal_obj['characteristics']:
         output_obj += f"<li><strong>Diet:</strong> {animal_obj['characteristics']['diet']}</li>\n"
-    if "taxonomy" in animal_obj :
-        if "kingdom" in animal_obj["taxonomy"]:
-            output_obj += f"<li><strong>Kingdom:</strong> {animal_obj["taxonomy"]['kingdom']}</li>\n"
-        if "scientific_name" in animal_obj["taxonomy"]:
-            output_obj += f"<li><strong>Scientific name:</strong> {animal_obj["taxonomy"]['scientific_name']}</li>\n"
-    if "locations" in animal_obj and len(animal_obj["locations"]) > 0:
+    if 'taxonomy' in animal_obj :
+        if 'kingdom' in animal_obj['taxonomy']:
+            output_obj += f"<li><strong>Kingdom:</strong> {animal_obj['taxonomy']['kingdom']}</li>\n"
+        if 'scientific_name' in animal_obj['taxonomy']:
+            output_obj += (f"<li><strong>Scientific name:</strong> "
+                           f"{animal_obj['taxonomy']['scientific_name']}</li>\n")
+    if 'locations' in animal_obj and len(animal_obj['locations']) > 0:
         output_obj += f"<li><strong>Location:</strong> {animal_obj['locations'][0]}</li>\n"
     if 'characteristics' in animal_obj :
         if'type' in animal_obj['characteristics']:
@@ -42,15 +47,15 @@ def main():
     for animal_obj in data:
         output += serialize_animal(animal_obj)
 
-     # open and read file
+    # open and read file
     with open("animals_template.html", "r") as file:
         content = file.read()
 
     # replace __REPLACE_ANIMALS_INFO__
     content = content.replace("__REPLACE_ANIMALS_INFO__", output)
 
-    # write back to file
-    with open("animals_template.html", "w") as file:
+    # write to a new file instead of overwriting template
+    with open("animals.html", "w") as file:
         file.write(content)
 
 
